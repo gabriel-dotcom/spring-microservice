@@ -1,0 +1,97 @@
+## Standard Directory Structure
+	src/main/java - Our Java source Code
+	src/main/resources - Properties / config files used by our app
+	src/main/webapp - JSP files and web config files other web assets (images, css, js)
+	src/test - Unit testing code and properties
+	target - Destination directory for copiled code. Automatically created by Maven
+
+	# POM File Structure - project meta data: Project name, version etc, Output file type: Jar, War.
+		- dependencies: List of projects we depend on Spring, Hibernate etc...
+		- plugins: Additional custom tasks to run: generate JUnit test reports etc..
+
+	# Project Coordinates - Elements:
+		- Group ID: Name of the company, group, or organization. Convention is to use reverse domain name: com.example
+		- Artifact ID: Name for this project: myexample
+		- Version: A specific release version like:1.0, 1.6... If project is under active development than: 1.0-SNAPSHOT
+
+	# Webapp Archetype - maven-archetype-webapp contains a sample Maven webaap 
+
+# What is Spring?
+	Spring é uma junção de varias classes para desenvolver uma aplicação web.
+
+	- Core Container: É o main, factory para criar beans e manage para bean dependencies
+		- SpEL: Spring Expression Language
+
+	# AOP - Aspect Oriented Programming adiciona funcionalidades para objetos declarativamente  (Logging, Security, Transactions)
+	# Data Access Layer (DTA) - Faz a comunicação com banco de dados. Aqui nós temos: JDBC (Para fazer acesso ao DB), ORM (Object Relational Mapping - Integração Hibernate e JPA),
+		 Transactions (Adiciona suporte para transações), OXM e JMS (Java Message Service - Para mandar mensagens async)
+
+	# Web Layer - Aqui nós temos: Servelet, WebSocket, Web, Portlet
+	# Infrastructure - AOP, Aspects, Instrumentation, Messaging
+	# Test Layer - Unit, Integration, Mock
+
+	# Spring Platform
+		- Spring Cloud: Para fazer a desenvolvimento em cloud
+		- Spring Data: Para fazer integração banco de dados
+		- Spring Batch: Para fazer processos batch
+		- Spring Security: Para segurança da aplicação
+
+	# What is a Spring Bean?
+		- A "Spring Bean" is simply a Java object. When Java objects are created by the Spring Container, then Spring refers to them as "Spring Beans".
+		Spring Beans are created from normal Java classes .... just like Java objects.
+
+	# Setter Injection - Este é onde o Spring framework injetará as dependencias chamando metodos da classe
+
+	# Bean Scopes - Scope refere-se ao lyfecycle de um bean. Por exemplo, quanto tempo o bean irá ficar vivo, quantas instancias serão criadas e como 
+	o bean será compartilhado
+
+	# Singleton - Spring container cria apenas uma instancia de um bean, por padrão, este é salvo na memória
+
+	# Spring Bean Scopes: Singleton - Cria apenas uma instancia de um bean. Escopo padrão
+		Prototype - Cria uma nova instancia para cada container request. Com esse escopo o Spring não chama o metedo de destroy
+		Request - Escopo para um HTTP request. Somente para web apps
+		Session - Escopo para um HTTP web session. Somente para web apps
+		Global-session - Escopo para um global HTTP web session. Somente para web apps
+
+	# Spring irá procurar pelos compenents que implementão certa interface e irá criar uma instancia para essa interface e então injetar essa interface no component
+
+
+	# Component - Por padrão o id do component será o nome da classe com a primeira letra minuscula, caso não for especificado o id do bean
+	If the annotation's value doesn't indicate a bean name, an appropriate name will be built based on the short name of the class (with the first letter lower-cased).
+
+	# AutoWiring - Para injeção de dependencia, Spring pode usar auto escrita, Spring irá injetar altomaticamente
+
+ 	# Explicitly Specify Bean Scope - Podemos especificar Scopos com a anotação @Scope() e dentro dos parenteses definimos o escopo	
+
+	# @Bean annotation: You can use @Bean to make an existing third-party class available to your Spring framework application context.
+
+# Building Spring MVC - Framework for building web application in Java. Based in Model-View-Controller design patter
+	- Como funciona? A requisição web irá para Front Controller que irá delegar essa requisição para o Controller chamada. Esse Controller chamado é onde contem a Business Logic
+	Basicamente cria um model e esse model é mandado de volta para Front Controller e o Front Controller irá passar esse modelo para o View Template (HTML page ou JSP etc...).
+	
+	- Components of a Spring MVC Application
+		A set of web pages to layout UI components
+		A collection of Spring beans (Controllers, services, etc..)
+		Spring configuration (XML, Annotations or Java
+
+	- Controller: Code created by developer. Contains our bussiner logic:
+		- Handle the request
+		- Store / retrieve data (db, web service)
+		- place data in model
+
+# Hibernate - FrameWork for persisting / saving Java objects in a database. Hibernate handles all of the low-level SQL, minimizes the amount of JDBC code have to develop.
+	Hibernate provides the Object-to-Relational Mapping (ORM). The developer defines mapping betwenn Java class and database table.
+	- Java class name: It's the same Database Table, for example, Students class is student Database table
+	- objects java class: It's the same columns in the Database
+
+	# Annotation - @Entity (entidade), 
+		@Table(name="table") - Name of the table,
+		@Id - id column
+		@Column(name="columnName") - Name of the Column
+
+# Maven - Maven is Project Manangement tool. Maven will work with dependencies. It will download the dependencies of the framework that you need, for example. Spring, hibernate, mysql, etc...
+	Handling JAR Dependencies
+
+# Spring Security - Spring Secutiry defines a frameqork for security. Implemented using servlet filters in the backgroundr
+
+# API Gateway - Trabalha entre as requisições do cliente e o back-end. Ele recebe as requisições do cliente e chama os serviços necessários

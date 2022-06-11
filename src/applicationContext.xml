@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- here we will use injection with Properties File -->
+    <!-- load the properties file: sport.properties -->
+    <!-- adding a reference for the context property placeholder -->
+    <context:property-placeholder location="classpath:sport.properties" />
+
+    <!-- Define your beans here -->
+    <!-- Define the dependency -->
+    <bean id="myFortuneService"
+          class="com.springdemo.HappyFortuneService">
+    </bean>
+
+    <!-- Using constructor injection -->
+    <bean id="myCoach"
+        class="com.springdemo.TrackCoach">
+
+        <!-- set up constructor injection -->
+        <constructor-arg ref="myFortuneService"/>
+    </bean>
+
+    <!-- Using setter injection -->
+    <bean id="myCricketCoach"
+        class="com.springdemo.CricketCoach">
+
+        <!-- set up setter injection -->
+        <!-- the spring will call for the merthod setFortuneService because the name="fortuneService" -->
+        <property name="fortuneService" ref="myFortuneService"/>
+
+        <!-- inject literal values -->
+        <!-- the spring will call for the merthod setEmailAddress because the name="emailAddress" -->
+        <!-- the spring will call for the merthod setTeam because the name="team" -->
+        <!--<property name="emailAddress" value="thebestcoach@luv2code.com"/>-->
+        <!--<property name="team" value="The best team to code"/>-->
+
+        <!-- Injecting the values with Properties File -->
+        <property name="emailAddress" value="${foo.email}"/>
+        <property name="team" value="${foo.team}"/>
+    </bean>
+    
+</beans>
+
+
+
+
+
